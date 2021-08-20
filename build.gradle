@@ -1,0 +1,40 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.apache.camel.springboot:camel-spring-boot-starter:3.11.1'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.apache.camel:camel-rabbitmq:3.11.1'
+    implementation 'org.apache.camel.springboot:camel-jackson-starter:3.11.1'
+    implementation 'org.apache.camel:camel-core:3.11.1'
+    testImplementation 'org.apache.camel:camel-http:3.11.1'
+    implementation 'org.apache.camel:camel-smpp:3.11.1'
+
+}
+
+test {
+    useJUnitPlatform()
+}
