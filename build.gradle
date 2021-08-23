@@ -32,6 +32,8 @@ dependencies {
     implementation 'org.apache.camel:camel-core:3.11.1'
     testImplementation 'org.apache.camel:camel-http:3.11.1'
     implementation 'org.apache.camel:camel-smpp:3.11.1'
+    implementation 'org.jsmpp:jsmpp:2.3.11'
+    implementation 'com.fizzed:ch-smpp:5.0.9'
 
 }
 
