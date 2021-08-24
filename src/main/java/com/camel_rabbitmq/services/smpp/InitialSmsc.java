@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class InitialSmsc {
 
-    private static final Logger logger = LoggerFactory.getLogger(CamelRabbitmqApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(InitialSmsc.class);
 
     @EventListener(ApplicationReadyEvent.class)
     public void initialSmsc() {

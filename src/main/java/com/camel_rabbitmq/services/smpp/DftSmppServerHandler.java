@@ -8,7 +8,9 @@ import com.cloudhopper.smpp.pdu.BaseBindResp;
 import com.cloudhopper.smpp.type.SmppProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DftSmppServerHandler implements SmppServerHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(DftSmppServerHandler.class);

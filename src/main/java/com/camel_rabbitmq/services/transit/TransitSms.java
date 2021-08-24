@@ -1,9 +1,10 @@
 package com.camel_rabbitmq.services.transit;
 
 import com.camel_rabbitmq.models.FacebookSms;
-import com.cloudhopper.smpp.pdu.PduRequest;
+import com.cloudhopper.smpp.pdu.SubmitSm;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.engine.DefaultProducerTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,9 +22,9 @@ public class TransitSms {
         }
     }
 
-    public void addSmsToQueue(PduRequest pduRequest) {
+    public void addSmsToQueue(SubmitSm submitSm) {
         try {
-            producerTemplate.asyncSendBody(producerTemplate.getDefaultEndpoint(), pduRequest);
+            producerTemplate.asyncSendBody(producerTemplate.getDefaultEndpoint(), submitSm);
         } catch (Exception e) {
             e.printStackTrace();
         }
