@@ -6,7 +6,6 @@ import com.cloudhopper.smpp.impl.DefaultSmppServer;
 import com.cloudhopper.smpp.type.SmppChannelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -15,7 +14,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@SpringBootApplication
 public class CloudHopperApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(CloudHopperApplication.class);
