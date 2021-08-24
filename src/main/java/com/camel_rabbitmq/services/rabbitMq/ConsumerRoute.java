@@ -12,7 +12,10 @@ public class ConsumerRoute extends RouteBuilder {
         try {
             from("rabbitmq:testExchange?queue=testQueue&autoDelete=false&connectionFactory=#rabbitConnectionFactory")
                     .routeId("RabbitMqConsumer")
-                    .log("Received body: ${body}");
+                    .log("Received body: ${body}")
+                    .to("smpp://smppclient@localhost:2775?password=password&enquireLinkTimer=3000&transactionTimer=5000&systemType=producer")
+                    .log("Sent messages successful")
+                    .end();
         } catch (Exception e) {
             e.printStackTrace();
         }
