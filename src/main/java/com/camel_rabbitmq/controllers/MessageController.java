@@ -1,7 +1,7 @@
 package com.camel_rabbitmq.controllers;
 
 import com.camel_rabbitmq.models.FacebookSms;
-import com.camel_rabbitmq.services.transit.TransitSms;
+import com.camel_rabbitmq.services.transit.ITransitSms;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api")
 public class MessageController {
 
-    private final TransitSms transitSms;
+    private final ITransitSms transitSms;
 
     @Autowired
-    public MessageController(TransitSms transitSms) {
+    public MessageController(ITransitSms transitSms) {
         this.transitSms = transitSms;
     }
 
