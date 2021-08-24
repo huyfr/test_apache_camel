@@ -15,6 +15,7 @@ public class ProducerRoute extends RouteBuilder {
             JacksonDataFormat jacksonDataFormat = new JacksonDataFormat(FacebookSms.class);
 
             from("direct:startQueuePoint")
+                    .log("Receive body: {$body}")
                     .id("RabbitMqProducer")
                     .marshal(jacksonDataFormat)
                     .to("rabbitmq:testExchange?queue=testQueue&autoDelete=false&connectionFactory=#rabbitConnectionFactory")

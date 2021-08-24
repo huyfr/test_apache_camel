@@ -4,15 +4,14 @@ import com.camel_rabbitmq.models.FacebookSms;
 import com.cloudhopper.smpp.pdu.SubmitSm;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.impl.engine.DefaultProducerTemplate;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class TransitSms {
 
     @Produce(value = "direct:startQueuePoint")
     private ProducerTemplate producerTemplate;
-
 
     public void testAddSmsToQueue(FacebookSms facebookSms) {
         try {

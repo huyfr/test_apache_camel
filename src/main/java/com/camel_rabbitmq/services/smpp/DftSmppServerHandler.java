@@ -23,7 +23,9 @@ public class DftSmppServerHandler implements SmppServerHandler {
     @Override
     public void sessionCreated(Long sessionId, SmppServerSession session, BaseBindResp preparedBindResponse) throws SmppProcessingException {
         logger.info("Session created: {}", session);
-        session.serverReady(new DftSmppSessionHandler(session));
+        DftSmppSessionHandler sessionHandler = new DftSmppSessionHandler();
+        sessionHandler.setSessionRef(session);
+        session.serverReady(sessionHandler);
     }
 
     @Override
