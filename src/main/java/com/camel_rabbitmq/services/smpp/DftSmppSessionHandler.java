@@ -1,4 +1,4 @@
-package cloudHopper.services;
+package com.camel_rabbitmq.services.smpp;
 
 import com.cloudhopper.smpp.SmppServerSession;
 import com.cloudhopper.smpp.SmppSession;
@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.ref.WeakReference;
 
-public class TestSmppSessionHandler extends DefaultSmppSessionHandler {
+public class DftSmppSessionHandler extends DefaultSmppSessionHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestSmppSessionHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(DftSmppSessionHandler.class);
 
-    private WeakReference<SmppSession> sessionRef;
+    private final WeakReference<SmppSession> sessionRef;
 
-    public TestSmppSessionHandler(SmppServerSession session) {
-        this.sessionRef = new WeakReference<SmppSession>(session);
+    public DftSmppSessionHandler(SmppServerSession session) {
+        this.sessionRef = new WeakReference<>(session);
     }
 
     @Override

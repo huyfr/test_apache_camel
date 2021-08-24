@@ -1,4 +1,4 @@
-package cloudHopper.services;
+package com.camel_rabbitmq.services.smpp;
 
 import com.cloudhopper.commons.util.HexUtil;
 import org.jboss.netty.buffer.BigEndianHeapChannelBuffer;
