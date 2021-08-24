@@ -1,11 +1,12 @@
 package com.camel_rabbitmq.services.smpp;
 
-import com.camel_rabbitmq.CamelRabbitmqApplication;
+import com.camel_rabbitmq.services.transit.ITransitSms;
 import com.cloudhopper.smpp.SmppServerConfiguration;
 import com.cloudhopper.smpp.impl.DefaultSmppServer;
 import com.cloudhopper.smpp.type.SmppChannelException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class InitialSmsc {
 
     private static final Logger logger = LoggerFactory.getLogger(InitialSmsc.class);
+
+    private final ITransitSms transitSms;
+
+    @Autowired
+    public InitialSmsc(ITransitSms transitSms) {
+        this.transitSms = transitSms;
+    }
 
     @EventListener(ApplicationReadyEvent.class)
     public void initialSmsc() {
@@ -46,7 +54,7 @@ public class InitialSmsc {
             configuration.setDefaultSessionCountersEnabled(true);
             configuration.setJmxEnabled(true);
 
-            DefaultSmppServer smppServer = new DefaultSmppServer(configuration, new DftSmppServerHandler(), executor, monitorExecutor);
+            DefaultSmppServer smppServer = new DefaultSmppServer(configuration, new DftSmppServerHandler(transitSms), executor, monitorExecutor);
 
             logger.info("Starting SMPP server...");
             smppServer.start();

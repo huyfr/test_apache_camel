@@ -1,17 +1,24 @@
-package com.camel_rabbitmq.services.transit;
+package com.camel_rabbitmq.services.transit.impl;
 
 import com.camel_rabbitmq.models.FacebookSms;
+import com.camel_rabbitmq.services.transit.ITransitSms;
 import com.cloudhopper.smpp.pdu.SubmitSm;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class TransitSms {
+public class TransitSms implements ITransitSms {
 
     @Produce(value = "direct:startQueuePoint")
-    private ProducerTemplate producerTemplate;
+    private final ProducerTemplate producerTemplate;
+
+    @Autowired
+    public TransitSms(ProducerTemplate producerTemplate) {
+        this.producerTemplate = producerTemplate;
+    }
 
     public void testAddSmsToQueue(FacebookSms facebookSms) {
         try {

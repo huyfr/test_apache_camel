@@ -1,6 +1,6 @@
 package com.camel_rabbitmq.services.smpp;
 
-import com.camel_rabbitmq.services.transit.TransitSms;
+import com.camel_rabbitmq.services.transit.ITransitSms;
 import com.cloudhopper.smpp.SmppServerSession;
 import com.cloudhopper.smpp.SmppSession;
 import com.cloudhopper.smpp.impl.DefaultSmppSessionHandler;
@@ -17,11 +17,13 @@ import java.lang.ref.WeakReference;
 public class DftSmppSessionHandler extends DefaultSmppSessionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(DftSmppSessionHandler.class);
+    private WeakReference<SmppSession> sessionRef;
+    private final ITransitSms transitSms;
 
     @Autowired
-    private TransitSms transitSms;
-
-    private WeakReference<SmppSession> sessionRef;
+    public DftSmppSessionHandler(ITransitSms transitSms) {
+        this.transitSms = transitSms;
+    }
 
     public void setSessionRef(SmppServerSession smppServerSession) {
         this.sessionRef = new WeakReference<>(smppServerSession);
