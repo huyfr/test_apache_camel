@@ -1,6 +1,6 @@
 package com.camel_rabbitmq.services.rabbitMq;
 
-import com.camel_rabbitmq.models.FacebookSms;
+import com.cloudhopper.smpp.pdu.SubmitSm;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.springframework.stereotype.Component;
@@ -12,14 +12,13 @@ public class ProducerRoute extends RouteBuilder {
     public void configure() {
 
         try {
-            JacksonDataFormat jacksonDataFormat = new JacksonDataFormat(FacebookSms.class);
+            JacksonDataFormat jacksonDataFormat = new JacksonDataFormat(SubmitSm.class);
 
             from("direct:startQueuePoint")
-                    .log("Receive body: {$body}")
                     .id("RabbitMqProducer")
                     .marshal(jacksonDataFormat)
                     .to("rabbitmq:testExchange?queue=testQueue&autoDelete=false&connectionFactory=#rabbitConnectionFactory")
-                    .log("Message Sent!")
+                    .log("Sms has entered queue!")
                     .end();
         } catch (Exception e) {
             e.printStackTrace();
