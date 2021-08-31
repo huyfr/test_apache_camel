@@ -31,16 +31,12 @@ public class DftSmppSessionHandler extends DefaultSmppSessionHandler {
 
     @Override
     public PduResponse firePduRequestReceived(PduRequest pduRequest) {
-        PduResponse response = null;
-        logger.info("Start time: {}", startTime);
         try {
-            SmppSession session = sessionRef.get();
-            SubmitSm mo = (SubmitSm) pduRequest;
-            transitSms.addSmsToQueue(mo);
-            response = pduRequest.createResponse();
+            transitSms.addPduRequestToQueue(pduRequest);
+            logger.info("Start time: {} - End time: {}", startTime, System.currentTimeMillis());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return response;
+        return pduRequest.createResponse();
     }
 }
